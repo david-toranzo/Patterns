@@ -13,10 +13,13 @@ namespace Patterns.Factory
 
         public Type GetObjectType(KeyObject keyObject)
         {
-            if(_factoryIds.ContainsKey(keyObject))
-                return _factoryIds[keyObject];
+            if (null == keyObject)
+                return default;
 
-            throw new System.Exception("The key object doesn't exist");
+            if (!_factoryIds.ContainsKey(keyObject))
+                throw new System.Exception("The key object doesn't exist");
+
+            return _factoryIds[keyObject];
         }
     }
 }
