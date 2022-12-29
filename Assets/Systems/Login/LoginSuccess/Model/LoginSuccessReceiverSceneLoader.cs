@@ -3,11 +3,11 @@ using Toranzo.SceneSystem;
 
 public class LoginSuccessReceiverSceneLoader
 {
-    private ISceneSystemLoader _sceneLoader;
+    private ISceneLoader _sceneLoader;
     private SceneData _sceneDataToLoad;
 
     public LoginSuccessReceiverSceneLoader(ISubscriberWithData<string> receiverWithData,
-                                              ISceneSystemLoader sceneLoader,
+                                              ISceneLoader sceneLoader,
                                               SceneData sceneDataToLoad)
     {
         _sceneLoader = sceneLoader;

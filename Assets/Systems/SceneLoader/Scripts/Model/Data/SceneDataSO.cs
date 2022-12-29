@@ -1,8 +1,8 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Toranzo.SceneSystem
 {
-    [CreateAssetMenu(fileName = "SceneData", menuName = "Data/Runtime/SceneData")]
+    [CreateAssetMenu(fileName = "SceneData", menuName = "ScriptableObjects/SceneData")]
     public class SceneDataSO : ScriptableObject
     {
         [SerializeField] private SceneData sceneData;
@@ -10,4 +10,3 @@ namespace Toranzo.SceneSystem
         public SceneData SceneData { get => sceneData; }
     }
 }
-

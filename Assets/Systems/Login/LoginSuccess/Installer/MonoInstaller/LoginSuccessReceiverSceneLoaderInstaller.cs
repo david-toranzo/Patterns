@@ -14,7 +14,7 @@ public class LoginSuccessReceiverSceneLoaderInstaller : MonoInstaller<LoginSucce
 
     protected override LoginSuccessReceiverSceneLoader GetDataType()
     {
-        ISceneSystemLoader sceneLoader = ServiceLocator.Instance.GetService<ISceneSystemLoader>();
+        ISceneLoader sceneLoader = ServiceLocator.Instance.GetService<ISceneLoader>();
 
         return new LoginSuccessReceiverSceneLoader(_receiverSubscriberInstaller.Data, sceneLoader, _sceneDataToLoad.SceneData);
     }
