@@ -24,7 +24,7 @@ namespace Patterns.State
 
         public abstract void Exit();
 
-        public virtual void Stay() //fixedupdate
+        public virtual void Stay() 
         {
             ProcessWorkActualState();
 
