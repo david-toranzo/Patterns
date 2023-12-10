@@ -1,10 +1,12 @@
 using System.Collections;
 using UnityEngine;
 
-namespace Patterns.State
+namespace Patterns.StateMachine
 {
-    public abstract class ControlStateMachine : MonoBehaviour, ISetState
+    public class StateMachineExecutor : MonoBehaviour, IStateSetter
     {
+        [SerializeField] private StateBase[] _statesBase;
+
         protected IStateMachine _stateMachine;
 
         private WaitForFixedUpdate _waitForFixedUpdate;
@@ -12,10 +14,30 @@ namespace Patterns.State
         private void OnEnable()
         {
             InitStateMachine();
+            InitStates();
             StartFixedCoroutine();
         }
 
-        protected abstract void InitStateMachine();
+        private void InitStateMachine()
+        {
+            SetStateMoveMachine(new StateMachine());
+
+            if(_statesBase.Length > 0)
+                SetCurrentState(_statesBase[0]);
+        }
+
+        private void InitStates()
+        {
+            foreach (StateBase state in _statesBase)
+            {
+                state.ConfigureSetState(this);
+            }
+        }
+
+        public void SetStateMoveMachine(IStateMachine stateMoveMachine)
+        {
+            _stateMachine = stateMoveMachine;
+        }
 
         protected void StartFixedCoroutine()
         {
@@ -37,9 +59,14 @@ namespace Patterns.State
             _stateMachine.SetCurrentState(newState);
         }
 
-        private void OnDestroy()
+        public void StopStateMachine()
         {
             StopAllCoroutines();
+        }
+
+        private void OnDestroy()
+        {
+            StopStateMachine();
         }
     }
 }

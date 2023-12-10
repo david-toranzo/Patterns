@@ -1,21 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
-namespace Patterns.State
+namespace Patterns.StateMachine
 {
     public abstract class StateBase : MonoBehaviour, IStateBase
     {
         [Header("References")]
         [SerializeField] protected Transition[] _transitions;
 
-        public UnityEvent OnStateEnter;
-        public UnityEvent OnStateExit;
+        protected IStateSetter _setCurrentState;
 
-        protected ISetState _setCurrentState;
-
-        public void ConfigureSetState(ISetState newSetState)
+        public void ConfigureSetState(IStateSetter newSetState)
         {
             _setCurrentState = newSetState;
         }
@@ -24,25 +18,24 @@ namespace Patterns.State
 
         public abstract void Exit();
 
-        public virtual void Stay() 
+        public virtual void Stay()
         {
             ProcessWorkActualState();
-
             ProcessTransition();
         }
 
         public virtual void ProcessTransition()
         {
-            foreach (Transition trans in _transitions)
+            foreach (Transition transition in _transitions)
             {
-                if (trans.GetProcessTransitionVerification())
+                if (transition.GetProcessTransitionVerification())
                 {
-                    _setCurrentState.SetCurrentState(trans.GetNextStateMove());
+                    _setCurrentState.SetCurrentState(transition.GetNextStateMove());
+                    return;
                 }
             }
         }
 
         protected abstract void ProcessWorkActualState();
-
     }
 }

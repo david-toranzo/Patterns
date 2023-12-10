@@ -1,6 +1,6 @@
-namespace Patterns.State
+namespace Patterns.StateMachine
 {
-    public interface ISetState
+    public interface IStateSetter
     {
         public void SetCurrentState(IStateBase newState);
     }

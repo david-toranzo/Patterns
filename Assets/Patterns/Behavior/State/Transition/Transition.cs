@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Patterns.State
+namespace Patterns.StateMachine
 {
     public abstract class Transition : MonoBehaviour
     {
